@@ -116,7 +116,7 @@ with exp_1:
 with exp_2:
     st.write('👇 Upload an image you want to do a prediction on!')
     file = st.file_uploader("image load", type=["jpg","png", "heic"], label_visibility="collapsed")
-    st.write('❗️ Note that the mobile Safari browser automatically converts the `HEIC` image to `JPEG` image and causes the rotation of the image. The wrong image orientation leads to a misdetection of faces!')
+    st.write('❗️ For users who accessed through mobile devices:  \n Note that the mobile Safari browser automatically converts the `HEIC` image to `JPEG` image and causes the rotation of the image. The wrong image orientation leads to a misdetection of faces!')
 
 with exp_3:
     st.write('Check the detected faces or make sure if the original image is uploaded correctly by switching between tabs!')
