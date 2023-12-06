@@ -77,7 +77,7 @@ with exp_1:
 
     with setting_tab:
         st.write('Select model checkpoints:')
-        data = st.radio("", options=["AgeDB", "AFAD", "CACD"], label_visibility="collapsed")
+        data = st.radio("checkpoints", options=["AgeDB", "AFAD", "CACD"], label_visibility="collapsed")
         model, age_labels = select_model(data.lower())
 
         if model:
@@ -112,7 +112,7 @@ with exp_1:
 
 with exp_2:
     st.write('👇 Upload an image you want to do a prediction on!')
-    file = st.file_uploader("", type="jpg", label_visibility="collapsed")
+    file = st.file_uploader("image load", type="jpg", label_visibility="collapsed")
 
 with exp_3:
     st.write('Check the detected faces or the original uploaded image by switching between tabs!')
@@ -144,7 +144,7 @@ with exp_3:
 
                 st.image(faces, caption=indices, width=60)
                 st.write('Select a face image:')
-                face = st.radio("", indices, label_visibility="collapsed")
+                face = st.radio("face image", indices, label_visibility="collapsed")
                 face = faces[face - 1]
                 clicked = st.button(f"Predict")
 
