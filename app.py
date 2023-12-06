@@ -118,7 +118,8 @@ with exp_2:
     file = st.file_uploader("image load", type=["jpg","png", "heic"], label_visibility="collapsed")
 
 with exp_3:
-    st.write('Check the detected faces or the original uploaded image by switching between tabs!')
+    st.write('Check the detected faces or make sure if the original image is uploaded correctly by switching between tabs!')
+    st.write('❗️ Note that the mobile Safari browser automatically converts the `HEIC` image to `JPEG` image and causes the rotation of the image. The wrong image orientation leads to a misdetection of faces!')
     faces_tab, original_tab = st.tabs(["Faces", "Uploaded Image"])
 
     if file is None:
