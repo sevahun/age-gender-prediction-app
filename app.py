@@ -4,6 +4,9 @@ from models import IR50_EVR_AgeRM_GP, IR50_EVR_AgeRM
 import face_recognition
 import torch
 from utils import get_data_specs, download_chpts, predict
+from pillow_heif import register_heif_opener
+
+register_heif_opener()
 
 
 @st.cache_data
@@ -112,7 +115,7 @@ with exp_1:
 
 with exp_2:
     st.write('👇 Upload an image you want to do a prediction on!')
-    file = st.file_uploader("image load", type="jpg", label_visibility="collapsed")
+    file = st.file_uploader("image load", type=["jpg","png", "heic"], label_visibility="collapsed")
 
 with exp_3:
     st.write('Check the detected faces or the original uploaded image by switching between tabs!')
