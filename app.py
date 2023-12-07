@@ -9,7 +9,7 @@ from pillow_heif import register_heif_opener
 register_heif_opener()
 
 
-@st.cache_data
+@st.cache_resource
 def select_model(data):
     age_num, age_labels = get_data_specs(data)
     if data == "cacd":
@@ -23,7 +23,7 @@ def select_model(data):
     return model, age_labels
 
 
-@st.cache_data
+@st.cache_resource
 def detect_faces(file):
     image = face_recognition.load_image_file(file)
     face_locations = face_recognition.face_locations(image)
@@ -116,7 +116,7 @@ with exp_1:
 with exp_2:
     st.write('👇 Upload an image you want to do a prediction on!')
     file = st.file_uploader("image load", type=["jpg","png", "heic"], label_visibility="collapsed")
-    st.write('❗️ For users who accessed through mobile devices:  \n Note that the mobile Safari browser automatically converts the `HEIC` image to `JPEG` image and causes the rotation of the image. The wrong image orientation leads to a misdetection of faces!')
+    st.write('❗️ For user who accessed through mobile device:  \n Please note that the mobile Safari browser automatically converts the `HEIC` image to `JPEG` image and causes the rotation of the image. The wrong image orientation leads to a misdetection of faces!')
 
 with exp_3:
     st.write('Check the detected faces or make sure if the original image is uploaded correctly by switching between tabs!')
