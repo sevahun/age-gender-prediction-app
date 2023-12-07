@@ -1,6 +1,6 @@
 from PIL import Image
 import streamlit as st
-from models import IR50_EVR_AgeRM_GP, IR50_EVR_AgeRM
+from models import IR50_EVR_AgeRM_GP
 import face_recognition
 import torch
 from utils import get_data_specs, download_chpts, predict
@@ -12,14 +12,11 @@ register_heif_opener()
 @st.cache_resource
 def select_model(data):
     age_num, age_labels = get_data_specs(data)
-    if data == "cacd":
-        model = IR50_EVR_AgeRM(age_num=age_num)
-    else:
-        model = IR50_EVR_AgeRM_GP(age_num=age_num)
-
+    
+    model = IR50_EVR_AgeRM_GP(age_num=age_num)
     chpt_path = download_chpts(data)
-
     model.load_state_dict(torch.load(chpt_path, map_location=torch.device("cpu")))
+    
     return model, age_labels
 
 
@@ -80,7 +77,7 @@ with exp_1:
 
     with setting_tab:
         st.write('Select model checkpoints:')
-        data = st.radio("checkpoints", options=["AgeDB", "AFAD", "CACD"], label_visibility="collapsed")
+        data = st.radio("checkpoints", options=["AgeDB", "AFAD"], label_visibility="collapsed")
         model, age_labels = select_model(data.lower())
 
         if model:
@@ -88,7 +85,7 @@ with exp_1:
 
     with details_tab:
         st.write('Switch between tabs to read more about model checkpoints!')
-        agedb_tab, afad_tab, cacd_tab = st.tabs(["AgeDB", "AFAD", "CACD"])
+        agedb_tab, afad_tab, cacd_tab = st.tabs(["AgeDB", "AFAD"])
         with agedb_tab:
             st.write('The AgeDB is a dataset that contains facial images of various '
                      'famous people captured under `real-world conditions` (i.e., having different poses, bearing '
@@ -103,15 +100,6 @@ with exp_1:
             st.write('❗️If you want to test the model on images that capture people of `asian ethnicity`, use this '
                      'checkpoint. Note that a prediction of this model checkpoint is unreliable for ages '
                      '`under 15` and `above 72` years.')
-
-        with cacd_tab:
-            st.write('The CACD is a dataset that contains images of `celebrities` that are mostly captured in '
-                     '`controlled environments` (i.e., on the red carpet, photo-shoot, with make-up, etc.). '
-                     'The dataset includes images for ages from `14` to `62` years.')
-            st.write(
-                '❗️If you want to test the model on images that capture people in `controlled environments`, use this '
-                'checkpoint. Note that a prediction of this model checkpoint is unreliable for ages `under 14` and '
-                '`above 62` years and there is `no gender prediction`.')
 
 with exp_2:
     st.write('👇 Upload an image you want to do a prediction on!')
@@ -159,8 +147,7 @@ with exp_3:
                     st.write('Prediction results:')
                     col_1, col_2 = st.columns(3)[0].columns(2)
                     col_1.metric(label="Age", value=f"{round(age.item(), 2)}", delta="Years")
-                    if gender is not None:
-                        col_2.metric(label="Gender", value=f"{gender}", delta=f"{gender_label}")
+                    col_2.metric(label="Gender", value=f"{gender}", delta=f"{gender_label}")
 
 
 ### END ###
