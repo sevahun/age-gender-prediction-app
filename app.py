@@ -85,7 +85,7 @@ with exp_1:
 
     with details_tab:
         st.write('Switch between tabs to read more about model checkpoints!')
-        agedb_tab, afad_tab, cacd_tab = st.tabs(["AgeDB", "AFAD"])
+        agedb_tab, afad_tab = st.tabs(["AgeDB", "AFAD"])
         with agedb_tab:
             st.write('The AgeDB is a dataset that contains facial images of various '
                      'famous people captured under `real-world conditions` (i.e., having different poses, bearing '
