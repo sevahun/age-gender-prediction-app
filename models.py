@@ -1,6 +1,6 @@
-### AGE AND GENDER PREDICTION MODELS ####
-# Age and gender prediction are implemented by us in another repository. You can check the original implementation
-# of models here: https://github.com/SeoulTech-HCIRLab/Relative-Age-Position-Learning.git
+### AGE AND GENDER PREDICTION MODEL ####
+# Age and gender prediction model is implemented by us in another repository. You can check the original implementation
+# of model here: https://github.com/SeoulTech-HCIRLab/Relative-Age-Position-Learning.git
 
 
 import torch
@@ -39,28 +39,6 @@ class IR50_EVR_AgeRM_GP(nn.Module):
         gender_out = self.fc_gender(x)  # [b, 256] --> [b, 2]
 
         return age_out, gender_out
-
-
-class IR50_EVR_AgeRM(nn.Module):
-    def __init__(self, age_num):
-        super().__init__()
-        self.age_num = age_num
-        self.backbone = Backbone()
-        self.fc_age = nn.Linear(256, self.age_num)
-        self.fc_feature = nn.Linear(self.age_num, 1)
-        self.fc_pos = nn.Linear(256, self.age_num)
-        self.avgpool = torch.nn.AdaptiveAvgPool2d((1, 1))
-        self.softmax = torch.nn.Softmax(dim=1)
-        self.parameter = Parameter(torch.Tensor(self.age_num))
-        self.sigmoid = torch.nn.Sigmoid()
-
-    def forward(self, x):
-        x = self.backbone(x)  # [b, 256, 14, 14]
-        x = torch.flatten(self.avgpool(x), 1)  # [b, 256]
-
-        age_out = self.softmax(self.fc_age(x))  # [b, 256] --> [b, n]
-
-        return age_out
 
 
 #### IR50 MODEL THAT IS USED AS BACKBONE ####
