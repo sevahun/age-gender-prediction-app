@@ -4,6 +4,8 @@ import streamlit as st
 import torch
 from pathlib import Path
 from torchvision import transforms
+from mega import Mega
+import os
 
 PATH = Path(__file__).parent
 
@@ -24,15 +26,17 @@ def download_chpts(data):
         pass
 
     else:
-        chpt_ids = {"agedb": "1IFU1TAih8gZqSJsCntJzBYW3WxZMBpB9",
-                    "afad": "1dzbYe9VW8RbE-2Zv2X4xTUihVVv7mXQA"}
+        chpt_ids = {"agedb": "https://mega.nz/file/hy9ngbhQ#dNsSTRuwDqov9Ykm4Dtsy_Gsgt76pz9D-FI_Tpw9qEA",
+                    "afad": "https://mega.nz/file/h2dXHQBI#1vi3t5KnBussyXL9GN5pG3HGRtuLc5NUwDUYFe53f4E"}
 
-        id = chpt_ids[data]
-        prefix = "https://drive.google.com/uc?/export=download&id="
+        link = chpt_ids[data]
+        mega = Mega()
+        m = mega.login()
         warning = None
         try:
             warning = st.warning(f"Downloading checkpoints...")
-            gdown.download(prefix + id, f"{chpt_path}")
+            m.download_url(link)
+            os.rename(f"{data}.pt", chpt_path)
         finally:
             if warning is not None:
                 warning.empty()
