@@ -1,5 +1,4 @@
 import json
-import gdown
 import streamlit as st
 import torch
 from pathlib import Path
