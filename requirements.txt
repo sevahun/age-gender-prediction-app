@@ -1,7 +1,7 @@
 face_recognition @ git+https://github.com/sevahun/face_recognition.git
-mega.py==1.0.8
+mega.py
 Pillow==10.1.0
-streamlit==1.29.0
+streamlit
 torch==1.11.0
 torchvision==0.12.0
 pillow_heif==0.14.0
