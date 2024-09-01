@@ -47,7 +47,7 @@ with st.sidebar:
     st.header('About')
     st.write(
         "This is an app that performs `face-based` `age estimation` and `gender prediction` using deep learning "
-        "model proposed in our paper. You can check the code for model implementation "
+        "model proposed in our [paper](https://ieeexplore.ieee.org/document/10646358). You can check the code for model implementation "
         "[here](https://github.com/SeoulTech-HCIRLab/Relative-Age-Position-Learning.git).")
     st.markdown('___')
     st.write("This streamlit app is created by [sevahun](https://github.com/sevahun). "
