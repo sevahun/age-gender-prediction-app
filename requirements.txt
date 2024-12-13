@@ -1,8 +1,8 @@
-numpy==1.26.4
+numpy
 face_recognition @ git+https://github.com/sevahun/face_recognition.git
 mega.py
-Pillow==10.1.0
+Pillow
 streamlit
-torch==1.11.0
-torchvision==0.12.0
-pillow_heif==0.14.0
+torch
+torchvision
+pillow_heif
